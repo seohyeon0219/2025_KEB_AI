@@ -1,20 +1,26 @@
+# from statistics import LinearRegression
+from sklearn.linear_model import LinearRegression
+# from sklearn.neighbors import KNeighborsRegressor
+
 import numpy as np
 import pandas as pd
+import matplotlib.pyplot as plt
 
-df = pd.DataFrame(
-    {"a" : [4, 5, 6], # 딕셔너리의 key값은 컬럼명이 됨
-    "b" : [7, 8, 9],
-    "c" : [10, 11, 12]}, index = [1, 2, 3], columns= ['a','b','c']) # index -> 로우의 index 값
+ls = pd.read_csv("https://github.com/ageron/data/raw/main/lifesat/lifesat.csv")
+# print(type(ls))
+# print(ls)
+x = ls[["GDP per capita (USD)"]].values
+y = ls[["Life satisfaction"]].values
 
-df = pd.DataFrame(
-    {"a" : [4, 5, 6],
-    "b" : [7, 8, 9],
-    "c" : [10, 11, 12]}) # key값, index를 지정하지 않으면 0부터 자동으로 지정됨
+# ls.plot(kind="scatter", grid=True, x="GDP per capita (USD)", y="Life satisfaction")
+# plt.axis([23500, 62500, 4, 9])
+# plt.show()
 
-df = pd.DataFrame(
-    [[4,7,10],
-     [5,8,11],
-     [6,9,12]],
-)
+model = LinearRegression()
+model = KNeighborsRegressor(n_neighbors=3)
+model.fit(x,y)
 
-print(df)
+X_new = [[31721.3]] #ROK 2020
+print(model.predict(X_new))
+# LinearRegression 5.90
+# KNeighborsRegressor 5.70
