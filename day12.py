@@ -13,3 +13,21 @@ df = pd.DataFrame(
 )
 
 print(df)
+
+#1
+df1 = df.copy()
+
+mean_A = df['A'].mean()
+mean_B = df['B'].mean()
+mean_C = df['C'].mean()
+
+df1['A'].fillna(mean_A,inplace=True)
+df1['B'].fillna(mean_B,inplace=True)
+df1['C'].fillna(mean_C,inplace=True)
+
+print(df1)
+
+#2
+i = SimpleImputer(strategy = 'mean')
+df[['A','B']] = i.fit_transform(df[['A','B']])
+print(df)
